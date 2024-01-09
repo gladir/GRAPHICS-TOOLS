@@ -18,14 +18,38 @@ Voici la liste des différentes commandes proposés dans GRAPHICS-TOOLS :
 			<td><b>BAR.PAS</b></td>
 			<td>Cette commande permet d'afficher un graphique à barre sur les données d'un fichier CSV.</td>
 		</tr>  
+		   <tr>
+		     <td><b>CMYK2RGB.PAS</b></td>
+		     <td>Cette commande permet de convertir les couleurs CMYK en couleurs RGB (RVB).</td>
+		   </tr>	
 		<tr>
 			<td><b>DRAW2LGO.PAS</b></td>
 			<td>Cette commande permet de convertir les chaines de caractères DRAW du langage de programmation BASIC en instruction du langage de programmation LOGO.</td>
 		</tr>
+   <tr>
+     <td><b>FINDKLR.PAS</b></td>
+    <td>Cette commande permet de détecter les couleurs mentionné dans un texte.</td>
+  </tr>	
 		<tr>
 			<td><b>FNT2PAS.PAS</b></td>
 			<td>Cette commande permet de convertir des fichiers de polices de caractères .FNT en code source Pascal.</td>
 		</tr>  
+  <tr>
+     <td><b>GREYRGB.PAS</b></td>
+     <td>Cette commande permet de retourner les teintes de gris correspondant à la couleur RGB (RVB).</td>
+  </td>
+  <tr>
+     <td><b>HSI2RGB.PAS</b></td>
+     <td>Cette commande permet de convertir les couleurs HSI en couleurs RGB (RVB).</td>
+  </tr>
+  <tr>
+     <td><b>HSL2RGB.PAS</b></td>
+     <td>Cette commande permet de convertir les couleurs HSL en couleurs RGB (RVB).</td>
+  </tr>  
+  <tr>
+     <td><b>HSV2RGB.PAS</b></td>
+     <td>Cette commande permet de convertir les couleurs HSV en couleurs RGB (RVB).</td>
+  </tr>	
 		<tr>
 			<td><b>ICO2ASM.PAS</b></td>
 			<td>Cette commande permet de transformer un icône (.ICO) en code source assembleur.</td>
@@ -70,6 +94,10 @@ Voici la liste des différentes commandes proposés dans GRAPHICS-TOOLS :
 			<td><b>IMG2HTML.PAS</b></td>
 			<td>Cette commande permet de convertir une image en code HTML.</td>
 		</tr>  
+  <tr>
+     <td><b>NEGRGB.PAS</b></td>
+     <td>Cette commande permet de retourner les négations des couleurs RGB (RVB).</td>
+  </tr>	
 		<tr>
 			<td><b>PPM2C.PAS</b></td>
 			<td>Cette commande permet de convertir une image de format PPM (Portable PixMap) en code source C.</td>
@@ -98,10 +126,34 @@ Voici la liste des différentes commandes proposés dans GRAPHICS-TOOLS :
 			<td><b>PPM2XBM.PAS</b></td>
 			<td>Cette commande permet de convertir une image de format PPM (Portable PixMap) en XBM (X BitMap).</td>
 		</tr>  
+  <tr> 
+    <td><b>RGB2CMYK.PAS</b></td>
+    <td>Cette commande permet de convertir les couleurs RGB (RVB en francais) en couleur CMYK.</td>
+  </tr>	
+   <tr>
+     <td><b>RGB2HSL.PAS</b></td>
+     <td>Cette commande permet de convertir les couleurs RGB (RVB en francais) en couleur HSL.</td>
+   </tr>
+  <tr>
+     <td><b>RGB2HSV.PAS</b></td>
+     <td>Cette commande permet de convertir les couleurs RGB (RVB en francais) en couleur HSV.</td>
+   </tr>	
 		<tr>
 			<td><b>RGB2HTML.PAS</b></td>
 			<td>Cette commande permet de convertir les trois valeurs RGB (RVB) en code couleur HTML.</td>
 		</tr>  
+   <tr> 
+    <td><b>RGB2XYZ.PAS</b></td>
+    <td>Cette commande permet de convertir les couleurs RGB (RVB en francais) en couleur XYZ.</td>
+  </tr>		
+  <tr> 
+    <td><b>RGB2YIQ.PAS</b></td>
+    <td>Cette commande permet de convertir les couleurs RGB (RVB en francais) en couleur YIQ.</td>
+  </tr>	
+  <tr> 
+    <td><b>RGB2YUV.PAS</b></td>
+    <td>Cette commande permet de convertir les couleurs RGB (RVB en francais) en couleur YUV.</td>
+  </tr>	
 		<tr>
 			<td><b>SVG2LSP.PAS</b></td>
 			<td>Cette commande permet de convertir une image de format SVG en format LSP (AutoLisp).</td>
@@ -178,6 +230,14 @@ Voici la liste des différentes commandes proposés dans GRAPHICS-TOOLS :
 			<td><b>XBM2RUBY.PAS</b></td>
 			<td>Cette commande permet de convertir une image de format XBM (X BitMap) en code source Ruby.</td>
 		</tr>  
+  <tr> 
+    <td><b>XYZ2RGB.PAS</b></td>
+    <td>Cette commande permet de convertir les couleurs XYZ en couleur RGB (RVB en français).</td>
+  </tr>
+  <tr>
+    <td><b>YIQ2RGB.PAS</b></td>
+    <td>Cette commande permet de convertir les couleurs YIQ en couleur RGB (RVB en français).</td>	
+  </tr>
 </table>  
 
 <h2>Compilation</h2>
