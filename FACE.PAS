@@ -178,7 +178,7 @@ BEGIN
   WriteLn('FACE : Cette commande permet d''afficher un ',
                    ' modäle de visage.');
   WriteLn;
-  WriteLn('Syntaxe : FACE [/WIDTH:largeur] [/HEIGHT:hauteur] [SHOWGRID:valeur]');
+  WriteLn('Syntaxe : FACE [/WIDTH:largeur] [/HEIGHT:hauteur] [SHOWGRID:valeur] [fichier]');
   WriteLn;
   WriteLn(' /FORMAT:format   Ce paramätre permet d''indiquer le format : SVG. Si aucun ',
                              'paramätre, vers l''Çcran.');
