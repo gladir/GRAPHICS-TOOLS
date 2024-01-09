@@ -94,6 +94,10 @@ Voici la liste des différentes commandes proposés dans GRAPHICS-TOOLS :
 			<td><b>IMG2HTML.PAS</b></td>
 			<td>Cette commande permet de convertir une image en code HTML.</td>
 		</tr>  
+		<tr>
+			<td><b>LOGO.PAS</b></td>
+			<td>Cette commande permet de lancer l'interpréteur de commande du langage de programmation LOGO. Il supporte aussi la tortue.</td>
+		</tr>	
   <tr>
      <td><b>NEGRGB.PAS</b></td>
      <td>Cette commande permet de retourner les négations des couleurs RGB (RVB).</td>
