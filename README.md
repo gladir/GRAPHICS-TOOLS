@@ -26,8 +26,12 @@ Voici la liste des différentes commandes proposés dans GRAPHICS-TOOLS :
 			<td><b>DRAW2LGO.PAS</b></td>
 			<td>Cette commande permet de convertir les chaines de caractères DRAW du langage de programmation BASIC en instruction du langage de programmation LOGO.</td>
 		</tr>
-   <tr>
-     <td><b>FINDKLR.PAS</b></td>
+	<tr>
+		<td><b>FACE.PAS</b></td>
+		<td>Cette commande permet d'afficher un modèle de visage.</td>
+   </tr>
+	<tr>
+	   <td><b>FINDKLR.PAS</b></td>
     <td>Cette commande permet de détecter les couleurs mentionné dans un texte.</td>
   </tr>	
 		<tr>
