@@ -34,6 +34,10 @@ Voici la liste des différentes commandes proposés dans GRAPHICS-TOOLS :
 	   <td><b>FINDKLR.PAS</b></td>
     <td>Cette commande permet de détecter les couleurs mentionné dans un texte.</td>
   </tr>	
+			<tr>
+			<td><b>FLOAD.PAS</b></td>
+			<td>Cette commande permet de charger une police de caractères à partir d'un fichier de format «.FNT» en mémoire vidéo. Cette commande est inspiré de la disquette «IT-VGA2 UTILITY» d'InformTech.</td>
+		</tr>
 		<tr>
 			<td><b>FNT2PAS.PAS</b></td>
 			<td>Cette commande permet de convertir des fichiers de polices de caractères .FNT en code source Pascal.</td>
