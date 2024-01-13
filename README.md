@@ -18,6 +18,10 @@ Voici la liste des différentes commandes proposés dans GRAPHICS-TOOLS :
 			<td><b>BAR.PAS</b></td>
 			<td>Cette commande permet d'afficher un graphique à barre sur les données d'un fichier CSV.</td>
 		</tr>  
+		<tr>
+			<td><b>BMP2XBM.PAS</b></td>
+			<td>Cette commande permet de convertir une image BitMap (.BMP) en XBM (X BitMap).</td>
+		</tr>
 		   <tr>
 		     <td><b>CMYK2RGB.PAS</b></td>
 		     <td>Cette commande permet de convertir les couleurs CMYK en couleurs RGB (RVB).</td>
