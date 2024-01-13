@@ -4,15 +4,11 @@
   @abstract(Target: Turbo Pascal 7, Free Pascal 3.2)
 }
 
-Program VIEWBMP;
+Program BMP2XBM;
 
 {$A-}
 
-Uses {$IFDEF FPC}
-      Crt,PtcGraph,PtcCrt,PtcMouse
-     {$ELSE}
-      Crt,Graph
-     {$ENDIF};
+Uses DOS;
 
 Const
   {Type de compression Windows}
@@ -50,6 +46,8 @@ Type
  End;
 
 Var
+ First:Boolean;
+ CountByLine:Word;
  SourceBMP:File;
  Header:HeaderBMP;
  Size,I,J,K,Min,Max,BytesPerLine,ByteReaded:Word;
@@ -59,8 +57,26 @@ Var
  PixelX,PixelY:Word;
  StartPos:LongInt;
  NumPal:Word;
+ ImageName:String;
  Palette:Array[0..255]of RGB32;
  Buffer:Array[0..4095]of Byte;
+
+Function ByteHex2Str(value:Byte):String;
+Const
+ matrix:Array[0..15]of Char = ('0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F');
+Begin
+ ByteHex2Str:=matrix[(value shr 4) and $0F]+matrix[value and $F];
+End;
+
+Function Path2Name(Const Path:String):String;
+Var
+ D:DirStr;
+ N:NameStr;
+ E:ExtStr;
+Begin
+ FSplit(Path,D,N,E);
+ Path2Name:=N;
+End;
 
 Function RGBTo16Color(R,G,B:Byte):Integer;
 Var
@@ -76,31 +92,6 @@ Begin
  RGBTo16Color:=Kr and$F;
 End;
 
-Procedure InitScr;
-Var
- Driver,Mode:Integer;
- ErrCode:Integer;
-Begin
- {$IFDEF FPC}
-  Driver:=VGA;
-  Mode:=VGAHi;
- {$ELSE}
-  Driver:=Detect;
-  Mode:=VGAHi;
- {$ENDIF}
- InitGraph(Driver,Mode,'');
- ErrCode:=GraphResult;
- If ErrCode=grOk Then Begin
-  SetColor(White);
-  SetLineStyle(0, 0, 1);
- End
-  Else
- Begin
-  WriteLn('Erreur graphique : ',GraphErrorMsg(ErrCode));
-  Halt;
- End;
-End;
-
 Procedure AddPixel;
 Var
  RawValue:Byte;
@@ -108,31 +99,51 @@ Begin
  Case(Header.BitCount)of
   4:Begin
    If NumPal=0 Then Begin
-    PutPixel(PixelX,PixelY,Value shr 4);
-    PutPixel(PixelX+1,PixelY,Value and $F);
+    If(First)Then First:=False
+     Else
+    Begin
+     Write(',');
+     Inc(CountByLine);
+     If CountByLine>12 Then Begin
+      CountByLine:=0;
+      WriteLn;
+      Write('  ');
+     End;
+    End;
+    Write('0x',ByteHex2Str(Value));
    End
     Else
    Begin
     If(PixelX<Header.NumXPixels)Then Begin
-     RawValue:=RGBTo16Color(Palette[Value shr 4].R,Palette[Value shr 4].G,Palette[Value shr 4].B);
-     PutPixel(PixelX,PixelY,RawValue);
-    End;
-    If(PixelX+1<Header.NumXPixels)Then Begin
-     RawValue:=RGBTo16Color(Palette[Value and $F].R,Palette[Value and $F].G,Palette[Value and $F].B);
-     PutPixel(PixelX+1,PixelY,RawValue);
+     If(First)Then First:=False
+      Else
+     Begin
+      Write(',');
+      Inc(CountByLine);
+      If CountByLine>12 Then Begin
+       CountByLine:=0;
+       WriteLn;
+       Write('  ');
+      End;
+     End;
+     Write('0x',ByteHex2Str(Value));
     End;
    End;
    Inc(PixelX,2);
   End;
   8:Begin
-   If NumPal=0 Then Begin
-    PutPixel(PixelX,PixelY,Value);
-   End
+   If(First)Then First:=False
     Else
    Begin
-    RawValue:=RGBTo16Color(Palette[Value].R,Palette[Value].G,Palette[Value].B);
-    PutPixel(PixelX,PixelY,RawValue);
+    Write(',');
+    Inc(CountByLine);
+    If CountByLine>12 Then Begin
+     CountByLine:=0;
+     WriteLn;
+     Write('  ');
+    End;
    End;
+   Write('0x',ByteHex2Str(Value));
    Inc(PixelX);
   End;
   24:Begin
@@ -141,8 +152,18 @@ Begin
     1:G:=Value;
     2:Begin
      B:=Value;
-     Value:=RGBTo16Color(R,G,B);
-     PutPixel(PixelX,PixelY,Value);
+     If(First)Then First:=False
+      Else
+     Begin
+      Write(',');
+      Inc(CountByLine,3);
+      If CountByLine>12 Then Begin
+       CountByLine:=0;
+       WriteLn;
+       Write('  ');
+      End;
+     End;
+     Write('0x',ByteHex2Str(R),',','0x',ByteHex2Str(G),',','0x',ByteHex2Str(B));
      Inc(PixelX)
     End;
    End;
@@ -152,15 +173,11 @@ Begin
 End;
 
 BEGIN
- {$IFDEF FPC}
-  {$IFDEF WINDOWS}
-   SetUseACP(False);
-  {$ENDIF}
- {$ENDIF}
  If(ParamStr(1)='/?')or(ParamStr(1)='--help')or(ParamStr(1)='-h')Then Begin
-  WriteLn('VIEWBMP : Cette commande permet de visualiser un image BitMap (.BMP).');
+  WriteLn('BMP2XBM : Cette commande permet de convertir une image BitMap (.BMP) ',
+                     'en XBM (X BitMap).');
   WriteLn;
-  WriteLn('Syntaxe : VIEWBMP nomdufichier.BMP');
+  WriteLn('Syntaxe : BMP2XBM nomdufichier.BMP');
   WriteLn;
   WriteLn(' nomdufichier   Ce paramätre permet d''indiquer le nom du fichier ".BMP".');
  End
@@ -172,6 +189,7 @@ BEGIN
    WriteLn('Impossible de lire le fichier d''image');
    Halt;
   End;
+  ImageName:=Path2Name(ParamStr(1));
   BlockRead(SourceBMP,Header,SizeOf(Header),ByteReaded);
   If Header.Sign<>'BM'Then Begin
    WriteLn('Signature d''entàte Bitmap introuvable !');
@@ -191,7 +209,6 @@ BEGIN
     Halt;
    End;
   End;
-  InitScr;
   PixelX:=0;
   PixelY:=0;
   CountValue:=0;
@@ -206,7 +223,13 @@ BEGIN
    BlockRead(SourceBMP,Palette,SizeOf(Palette),ByteReaded);
   End;
   StartPos:=Header.OffBits;
+  First:=True;
   If BIH.biCompression in[bi_RGB]Then Begin
+   CountByLine:=0;
+   WriteLn('#define ',ImageName,'_width ',Header.NumXPixels);
+   WriteLn('#define ',ImageName,'_height ',Header.NumYPixels);
+   WriteLn('static unsigned char ',ImageName,'_bits[] = {');
+   Write('  ');
    For I:=Header.NumYPixels-1 downto 0 do Begin
     Seek(SourceBMP,StartPos+I*BytesPerLine);
     BlockRead(SourceBMP,Buffer,BytesPerLine,ByteReaded);
@@ -217,17 +240,17 @@ BEGIN
     End;
     Inc(PixelY);
    End;
+   WriteLn;
+   WriteLn('};');
   End
    Else
   Begin
    WriteLn('Compression RLE4 ou RL8 non supportÇ');
+   Halt(3);
   End;
   Close(SourceBMP);
-  If(ReadKey=#0)Then Begin
-   If(ReadKey<>#0)Then Begin
-   End;
-  End;
  End
   Else
  WriteLn('Paramätre requis !');
 END.
+
